@@ -1,0 +1,151 @@
+/* CREATE TABLE PART */
+
+CREATE TABLE Campaign
+(
+Campaign_Id NUMERIC(6) PRIMARY KEY NOT NULL,
+Campaign_Name VARCHAR(25) NOT NULL,
+Description VARCHAR(50) NOT NULL,
+Total_Donation NUMERIC(6) NOT NULL
+);
+
+CREATE TABLE Volunteer
+(
+Vol_ID NUMERIC(6) PRIMARY KEY NOT NULL,
+Vol_Name VARCHAR(25) NOT NULL,
+Working_Hour NUMERIC(6) NOT NULL,
+Campaign_ID NUMERIC(6) NOT NULL REFERENCES Campaign (Campaign_Id)
+);
+
+CREATE TABLE Donation
+(
+Donation_Id NUMERIC(6) PRIMARY KEY NOT NULL,
+Donation_Date DATE NOT NULL,
+Amount NUMERIC(10) NOT NULL ,
+Fund_type VARCHAR(25),
+Donor_Id NUMERIC(6) NOT NULL REFERENCES Donor (Donor_Id)
+);
+
+CREATE TABLE Receipt
+(
+Receipt_Id NUMERIC(6) PRIMARY KEY NOT NULL,
+Donor_Id NUMERIC(6) NOT NULL REFERENCES Donor (Donor_Id),
+Donation_Id NUMERIC(6) NOT NULL REFERENCES Donation (Donation_Id)
+);
+
+CREATE TABLE Donor
+(
+Donor_Id NUMERIC(6) PRIMARY KEY NOT NULL,
+Donor_Name VARCHAR(20) NOT NULL,
+Street VARCHAR(20),
+Phone_Number NUMERIC(11),
+Email VARCHAR(25),
+Donor_Type VARCHAR(10),
+Campaign_Id NUMERIC(6) NOT NULL REFERENCES Campaign (Campaign_Id)
+);
+
+/* VALUE INSERTION PART */
+
+INSERT INTO project.`donor` (Donor_Id, Donor_Name, Street, Phone_Number, Email, Campaign_Id) VALUES ('101', 'Sylvia Millat', 'Fuller', '01936784657', 'smillat', '201');
+INSERT INTO project.`donor` (Donor_Id, Donor_Name, Street, Phone_Number, Email, Campaign_Id) VALUES ('102', 'Shahriar Hossain', 'Dhakeswari', '01735466578', 'shossain', '201');
+INSERT INTO project.`donor` (Donor_Id, Donor_Name, Street, Phone_Number, Email, Campaign_Id) VALUES ('103', 'Sadman Haider', 'Hare', '01645673298', 'sadmanh', '202');
+INSERT INTO project.`donor` (Donor_Id, Donor_Name, Street, Phone_Number, Email, Campaign_Id) VALUES ('104', 'Sabrina Islam', 'DoctorGoli', '01721893494', 'islams', '201');
+INSERT INTO project.`donor` (Donor_Id, Donor_Name, Phone_Number, Email, Campaign_Id) VALUES ('105', 'Afia Rahman', '01698502640', 'arahman', '202');
+INSERT INTO project.`donor` (Donor_Id, Donor_Name, Street, Phone_Number, Email, Campaign_Id) VALUES ('106', 'Humaira Khan', 'Lake Drive', '01839403276', 'khan.h', '205');
+INSERT INTO project.`donor` (Donor_Id, Donor_Name, Street, Email, Campaign_Id) VALUES ('107', 'Ibrahim Mollah', 'Fuller', 'imollah', '210');
+INSERT INTO project.`donor` (Donor_Id, Donor_Name, Street, Email, Campaign_Id) VALUES ('108', 'Aryan Ahmed', 'Japan Street', 'aahmed', '207');
+INSERT INTO project.`donor` (Donor_Id, Donor_Name, Street, Phone_Number, Campaign_Id) VALUES ('109', 'Zeeshan Khan', 'Abdur Sadek', '01633890956', '209');
+INSERT INTO project.`donor` (Donor_Id, Donor_Name, Email, Campaign_Id) VALUES ('110', 'Ashfia Hasan', 'a.hasan', '206');
+
+
+
+
+INSERT INTO project.`campaign` (Campaign_Id, Campaign_Name, Description, Total_Donation) VALUES ('201', 'Coming together', 'Fund for flood victims', '70000');
+INSERT INTO project.`campaign` (Campaign_Id, Campaign_Name, Description, Total_Donation) VALUES ('202', 'Charity for literacy', 'For the education of underprivileged children', '190000');
+INSERT INTO project.`campaign` (Campaign_Id, Campaign_Name, Description, Total_Donation) VALUES ('203', 'Action for animals', 'Animal welfare', '30000');
+INSERT INTO project.`campaign` (Campaign_Id, Campaign_Name, Description, Total_Donation) VALUES ('204', 'Carnival of love', 'For treatment of the poor in hospitals', '250000');
+INSERT INTO project.`campaign` (Campaign_Id, Campaign_Name, Description, Total_Donation) VALUES ('205', 'Fight cancer', 'For cancer patients', '500000');
+INSERT INTO project.`campaign` (Campaign_Id, Campaign_Name, Description, Total_Donation) VALUES ('206', 'The care club', 'Fund for orphanages', '40000');
+INSERT INTO project.`campaign` (Campaign_Id, Campaign_Name, Description, Total_Donation) VALUES ('207', 'Find a fortune', 'Donation to slums', '45000');
+INSERT INTO project.`campaign` (Campaign_Id, Campaign_Name, Description, Total_Donation) VALUES ('208', 'All for love', 'Rohingya camps', '60000');
+INSERT INTO project.`campaign` (Campaign_Id, Campaign_Name, Description, Total_Donation) VALUES ('209', 'Care to cure', 'Covid-19 treatment', '125000');
+INSERT INTO project.`campaign` (Campaign_Id, Campaign_Name, Description, Total_Donation) VALUES ('210', 'Clever donations', 'Supply of hygiene products to the needy', '100000');
+
+
+INSERT INTO project.`volunteer` (Vol_Id, Vol_Name, Working_Hour, Campaign_Id) VALUES ('301', 'Lin', '3', '201');
+INSERT INTO project.`volunteer` (Vol_Id, Vol_Name, Working_Hour, Campaign_Id) VALUES ('302', 'Lina', '2', '202');
+INSERT INTO project.`volunteer` (Vol_Id, Vol_Name, Working_Hour, Campaign_Id) VALUES ('303', 'Bubble', '4', '203');
+INSERT INTO project.`volunteer` (Vol_Id, Vol_Name, Working_Hour, Campaign_Id) VALUES ('304', 'Zoro', '5', '204');
+INSERT INTO project.`volunteer` (Vol_Id, Vol_Name, Working_Hour, Campaign_Id) VALUES ('305', 'Mimi', '2', '205');
+INSERT INTO project.`volunteer` (Vol_Id, Vol_Name, Working_Hour, Campaign_Id) VALUES ('306', 'Tintin', '8', '206');
+INSERT INTO project.`volunteer` (Vol_Id, Vol_Name, Working_Hour, Campaign_Id) VALUES ('307', 'Deku', '6', '207');
+INSERT INTO project.`volunteer` (Vol_Id, Vol_Name, Working_Hour, Campaign_Id) VALUES ('308', 'Bakugo', '9', '208');
+INSERT INTO project.`volunteer` (Vol_Id, Vol_Name, Working_Hour, Campaign_Id) VALUES ('309', 'Ash', '7', '209');
+
+
+INSERT INTO project.`donation` (Donation_Id, Donation_Date, Amount, Fund_Type, Donor_Id) VALUES ('401', '01-01-2020', '50000', 'Flood Fund', '101');
+INSERT INTO project.`donation` (Donation_Id, Donation_Date, Amount, Fund_Type, Donor_Id) VALUES ('402', '02-02-2020','40000', 'Education Fund', '102');
+INSERT INTO project.`donation` (Donation_Id, Donation_Date, Amount, Fund_Type, Donor_Id) VALUES ('403', '03-03-2020', '30000', 'Animal welfare Fund', '103');
+INSERT INTO project.`donation` (Donation_Id, Donation_Date, Amount, Fund_Type, Donor_Id) VALUES ('404', '04-04-2020', '60000', 'Poor Fund', '104');
+INSERT INTO project.`donation` (Donation_Id, Donation_Date, Amount, Fund_Type, Donor_Id) VALUES ('405', '05-05-2020', '70000', 'Cancer patient Fund', '105');
+INSERT INTO project.`donation` (Donation_Id, Donation_Date, Amount, Fund_Type, Donor_Id) VALUES ('406', '06-06-2020', '80000', 'Orphanage Fund', '106');
+INSERT INTO project.`donation` (Donation_Id, Donation_Date, Amount, Fund_Type, Donor_Id) VALUES ('407', '07-07-2020', '35000', 'Slums Fund', '107');
+INSERT INTO project.`donation` (Donation_Id, Donation_Date, Amount, Fund_Type, Donor_Id) VALUES ('408', '08-08-2020', '58000', 'Rohinga camp Fund', '108');
+INSERT INTO project.`donation` (Donation_Id, Donation_Date, Amount, Fund_Type, Donor_Id) VALUES ('409', '09-09-2020', '67000', 'Covid-19 Fund', '109');
+INSERT INTO project.`donation` (Donation_Id, Donation_Date, Amount, Fund_Type, Donor_Id) VALUES ('410', '10-10-2020', '59000', 'Needy Fund', '110');
+
+
+INSERT INTO project.`receipt` (Receipt_Id, Donation_Id, Donor_Id) VALUES ('501', '401', '101');
+INSERT INTO project.`receipt` (Receipt_Id, Donation_Id, Donor_Id) VALUES ('502', '402', '102');
+INSERT INTO project.`receipt` (Receipt_Id, Donation_Id, Donor_Id) VALUES ('503', '403', '103');
+INSERT INTO project.`receipt` (Receipt_Id, Donation_Id, Donor_Id) VALUES ('504', '404', '104');
+INSERT INTO project.`receipt` (Receipt_Id, Donation_Id, Donor_Id) VALUES ('505', '405', '105');
+INSERT INTO project.`receipt` (Receipt_Id, Donation_Id, Donor_Id) VALUES ('506', '406', '106');
+INSERT INTO project.`receipt` (Receipt_Id, Donation_Id, Donor_Id) VALUES ('507', '407', '107');
+INSERT INTO project.`receipt` (Receipt_Id, Donation_Id, Donor_Id) VALUES ('508', '408', '108');
+INSERT INTO project.`receipt` (Receipt_Id, Donation_Id, Donor_Id) VALUES ('509', '409', '109');
+INSERT INTO project.`receipt` (Receipt_Id, Donation_Id, Donor_Id) VALUES ('510', '410', '110');
+
+/* ALTER TABLE PART */
+
+ALTER TABLE project.`donor` 
+ADD INDEX Campaign_Id_idx (Campaign_Id ASC) VISIBLE;
+;
+ALTER TABLE project.`donor` 
+ADD CONSTRAINT Campaign_Id
+  FOREIGN KEY (Campaign_Id)
+  REFERENCES project.`campaign` (Campaign_Id)
+  ON DELETE NO ACTION
+  ON UPDATE NO ACTION;
+  
+  ALTER TABLE project.`donation` 
+ADD INDEX Donor_Id_idx (Donor_Id ASC) VISIBLE;
+;
+ALTER TABLE project.`donation` 
+ADD CONSTRAINT Donor_Id
+  FOREIGN KEY (Donor_Id)
+  REFERENCES project.`donor` (Donor_Id)
+  ON DELETE NO ACTION
+  ON UPDATE NO ACTION;
+  
+  ALTER TABLE project.`receipt` 
+ADD INDEX Donor_Id_idx (Donor_Id ASC) VISIBLE,
+ADD INDEX Donation_Id_idx (Donation_Id ASC) VISIBLE;
+;
+ALTER TABLE project.`receipt` 
+ADD
+  FOREIGN KEY (Donor_Id)
+  REFERENCES project.`donor` (Donor_Id)
+  ON DELETE NO ACTION
+  ON UPDATE NO ACTION,
+ADD
+  FOREIGN KEY (Donation_Id)
+  REFERENCES project.`donation` (Donation_Id)
+  ON DELETE NO ACTION
+  ON UPDATE NO ACTION;
+  
+  ALTER TABLE project.`volunteer` 
+ADD
+  FOREIGN KEY (Campaign_ID)
+  REFERENCES project.`campaign` (Campaign_Id)
+  ON DELETE NO ACTION
+  ON UPDATE NO ACTION;
